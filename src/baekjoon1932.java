@@ -21,6 +21,11 @@ public class baekjoon1932 {
         }
 
         /**
+         *         7
+         *       3   8
+         *     8   1   0
+         *   2   7   4   4
+         * 4   5   2   6   5
             arr[1][0]+=arr[0][0];
             arr[1][1]+=arr[0][0];
             arr[2][0]+=arr[1][0];
@@ -43,13 +48,6 @@ public class baekjoon1932 {
                     arr[k][j]+=Math.max(arr[k-1][j-1], arr[k-1][j]);
             }
         }
-
-//        for(int i=0;i<n;i++){
-//            for(int j=0;j<n;j++){
-//                System.out.print(arr[i][j]+" ");
-//            }
-//            System.out.println();
-//        }
 
         // 최댓값 찾기
         int max=0;
