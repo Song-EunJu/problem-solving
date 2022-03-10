@@ -49,7 +49,7 @@ public class baekjoon1966 {
                     int tempPriority = list.get(0).priority;
                     list.remove(0);
                     list.add(new Element(tempPos, tempPriority));
-                    temp++; // 큰 요소가 있는 경우 temp 값 변경
+                    temp++; // 큰 요소가 있는 경우 temp 값 변경![](../../../../WINDOW~1/AppData/Local/Temp/01. SW마에스트로 13기 모집_홈페이지 배너.jpg)
                     break;
                 }
             }

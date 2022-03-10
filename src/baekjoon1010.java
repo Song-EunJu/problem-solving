@@ -21,6 +21,8 @@ public class baekjoon1010 {
     }
 
     static BigInteger cal(int west, int east){
+        // nCr = n!
+        //  ((n-r)!*r!)
         BigInteger sum = factorial(east).divide(factorial(east-west)).divide(factorial(west));
         return sum;
     }
