@@ -1,24 +1,25 @@
-/*
-    처음엔 최대공약수를 구해서 원래 값들을 최대공약수로 나눈 값을 곱하면 된다고 생각했는데
-    [3,9,4,16] -> 으로 했을 때는 최대공약수가 1이라서 이상한 값이 나옴
-*/
+/**
+ - for문을 돌면서 2개씩 연산
+ 1. A,B의 최대공약수 계산
+ 2. 1에서 구한 최대공약수를 이용해 A,B의 최소공배수 계산
+ 3. 2에서 구한 최소공배수가 다음 연산의 A값이 된다
+
+ - A값이 이전 연산의 최소공배수로 사용되기 때문에 배열의 마지막 요소에는 최종적으로 N개 수의 최소공배수 저장됨
+ */
 class Solution {
     public int solution(int[] arr) {
         int answer = 1;
-        // n개 수의 최소공배수 구하기
         for(int i=0;i<arr.length-1;i++){
-            int gcd = gcd(arr[i], arr[i+1]); // 일단 최대공약수를 구해!
-
-            answer = arr[i]/gcd * arr[i+1]/gcd * gcd; // 최소공배수를 구하고
-            arr[i+1] = answer; // arr[i+1] 를 최소공배수로 두고 그다음 작업을 함
+            int gcd = gcd(arr[i], arr[i+1]);
+            answer = arr[i]/gcd * arr[i+1]/gcd * gcd;
+            arr[i+1] = answer;
         }
         return answer;
     }
 
-    // 최대공약수 구하기
     public int gcd(int a, int b){
         while(b!=0){
-            int r=a%b; // 나머지
+            int r=a%b;
             a=b;
             b=r;
         }
