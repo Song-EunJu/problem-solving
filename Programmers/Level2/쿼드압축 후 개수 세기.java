@@ -41,3 +41,33 @@ class Solution {
             check(arr, size/2, n1, n2);
     }
 }
+
+/* 함수 1개로 줄인 코드
+class Solution {
+    static int zero=0, one=0;
+
+    void press(int [][] arr, int size, int n1, int n2){
+        int sum=0;
+        for(int i=n1;i<n1+size;i++){
+            for(int j=n2;j<n2+size;j++){
+                sum+=arr[i][j];
+            }
+        }
+
+        if(sum==0) zero++;
+        else if(sum==size*size) one++;
+        else {
+            int num = size/2;
+            press(arr, num, n1, n2);
+            press(arr, num, n1, n2+num);
+            press(arr, num, n1+num, n2);
+            press(arr, num, n1+num, n2+num);
+        }
+    }
+
+    public int[] solution(int[][] arr) {
+        press(arr, arr.length, 0, 0);
+        return new int[] {zero, one};
+    }
+}
+*/
