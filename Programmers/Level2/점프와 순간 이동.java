@@ -1,9 +1,5 @@
 /*
-    - 2의 제곱수인 경우, 무조건 1
-    4 = 1+(1)+(2)
-    8 = 1+(1)+(2)+(4)
-
-    - 2의 제곱수가 아닌데 2의 배수인 경우, 절반한 거랑 동일
+    - 2의 배수인 경우, 절반한 거랑 동일
     3 = 1+(1)+1
     6 = 1+(1)+1+(3)
 
@@ -32,7 +28,7 @@ public class Solution {
 
 public class Solution {
     public int check(int n){
-        if((n&(n-1))==0)
+        if(n==1)
             return 1;
         else if(n%2==0)
             return check(n/2);
