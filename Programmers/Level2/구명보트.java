@@ -2,6 +2,7 @@
     - 가장 가벼운 사람 + 가장 무거운 사람 > limit 인 경우, max 를 감소시켜 짝지을 사람 탐색
     - 가장 가벼운 사람 + 가장 무거운 사람 < limit 인 경우, 둘이 짝지어지므로 min 은 증가, max는 감소
 */
+import java.util.*;
 class Solution {
     public int solution(int[] people, int limit) {
         int answer=0;
@@ -33,7 +34,6 @@ class Solution {
         - Arrays.stream(배열)
         - boxed() : primitive type -> wrapper class type
 */
-// import java.util.*;
 // class Solution {
 //     public int solution(int[] people, int limit) {
 //         int answer=0;
