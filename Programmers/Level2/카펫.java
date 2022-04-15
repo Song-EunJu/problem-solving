@@ -21,3 +21,28 @@ class Solution {
         return answer;
     }
 }
+
+/*
+    1. yellow = 2
+        (2,1) -> (4,3) = 4*3 = 12 = 10+2
+    2. yellow = 1
+        (1,1) -> (3,3) = 3*3 = 9 = 8+1
+    3. yellow = 24
+        (6,4) -> (8,6) = 8*6 = 48 = 24+24
+
+    24 가 되는 조합이
+    (24,1) (12,2) (8,3) (6,4) 이렇게 있지만
+    (6,4) 인 경우에만 +2씩 했을 때 (8,6) => 8*6 이 brown+yellow 과 동일함
+*/
+class Solution {
+    public int[] solution(int brown, int yellow) {
+        int i=1;
+        while(true){
+            if(yellow%i==0) { // i가 약수인 경우
+                if((i+2)*(yellow/i+2) == brown+yellow)
+                    return new int[]{yellow/i+2,i+2};
+            }
+            i++;
+        }
+    }
+}
