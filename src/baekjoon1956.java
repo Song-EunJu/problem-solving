@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
@@ -24,6 +25,11 @@ public class baekjoon1956 {
         e = Integer.parseInt(st.nextToken()); // 간선
         arr = new int[v+1][v+1]; // 인접행렬
 
+        // 일단 다 무한대로 초기화
+        for(int i=1;i<=v;i++){
+            Arrays.fill(arr[i], 10000000);
+        }
+
         // 인접행렬에 정점, 길이 값 채우기
         for(int i=0;i<e;i++){
             st = new StringTokenizer(br.readLine());
@@ -33,34 +39,18 @@ public class baekjoon1956 {
             arr[start][end] = dist;
         }
 
-        // 자기자신이 아닌데 0인 애들 = 경로가 없다는 것 = 무한대로 초기화
-        for(int i=1;i<=v;i++){
-            for(int j=1;j<=v;j++){
-                if(i!=j && arr[i][j]==0){
-                    arr[i][j] = 10000000;
-                }
-            }
-        }
-
         for(int i=1;i<=v;i++) { // 정점으로 선택된 애들
-            for(int j=1;j<=v;j++){ // 인접행렬 2차원 배열 돌면서
-                if(i==j) break;
+            for(int j=1;j<=v;j++){ // 인접행렬 2차원 배열 돌면서 최단거리 계산
                 for(int k=1;k<=v;k++){
-                    if(i!=k && j!=k) { // j,k 모두 정점으로 선택된 좌표와 관련 없는 경우에만 최단 거리 계산하는 연산 진행
-                        arr[j][k] = Math.min(arr[j][k], arr[j][i] + arr[i][k]);
-                    }
+                    arr[j][k] = Math.min(arr[j][k], arr[j][i] + arr[i][k]);
                 }
             }
         }
 
         for(int i=1;i<=v;i++){ // 사이클을 그려야하므로 (a,b) + (b,a) 경로를 더한 것 중 가장 작은 거 출력
-            for(int j=1;j<=v;j++){
-                if(i!=j){
-                    if(arr[i][j]+arr[j][i] < min)
-                        min = arr[i][j]+arr[j][i];
-                }
-            }
+            min = Math.min(min, arr[i][i]);
         }
+
         if(min < 10000000)
             System.out.println(min);
         else
