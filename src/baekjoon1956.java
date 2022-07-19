@@ -3,21 +3,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+/**
+ * 플로이드 와샬 : 모든 정점에서 모든 정점으로의 최단경로
+ * - DP 에 근거
+ * - <거쳐가는 정점>을 기준으로 최단거리를 구하는 것
+ * - ex) 거쳐가는 정점 = 노드1
+ *
+ * X에서 Y로 가는 최소 비용 VS (X에서 노드1로 가는 비용 + 노드1에서 Y로 가는 비용)
+ * 테이블 만듦 -> 현재까지 계산된 최소 비용
+ */
 public class baekjoon1956 {
     static int arr[][];
-    static int visit[];
-    static int length;
     static int min = Integer.MAX_VALUE;
     static int v,e;
-    static int firstStart;
-    static int cnt;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        v = Integer.parseInt(st.nextToken());
-        e = Integer.parseInt(st.nextToken());
-        visit = new int[v+1]; // 정점 방문 여부
+        v = Integer.parseInt(st.nextToken()); // 정점
+        e = Integer.parseInt(st.nextToken()); // 간선
         arr = new int[v+1][v+1]; // 인접행렬
 
         // 인접행렬에 정점, 길이 값 채우기
@@ -29,49 +33,37 @@ public class baekjoon1956 {
             arr[start][end] = dist;
         }
 
+        // 자기자신이 아닌데 0인 애들 = 경로가 없다는 것 = 무한대로 초기화
         for(int i=1;i<=v;i++){
-            firstStart = i;
-            cnt++;
-            dfs(i);
+            for(int j=1;j<=v;j++){
+                if(i!=j && arr[i][j]==0){
+                    arr[i][j] = 10000000;
+                }
+            }
         }
-        if(min == Integer.MAX_VALUE)
+
+        for(int i=1;i<=v;i++) { // 정점으로 선택된 애들
+            for(int j=1;j<=v;j++){ // 인접행렬 2차원 배열 돌면서
+                if(i==j) break;
+                for(int k=1;k<=v;k++){
+                    if(i!=k && j!=k) { // j,k 모두 정점으로 선택된 좌표와 관련 없는 경우에만 최단 거리 계산하는 연산 진행
+                        arr[j][k] = Math.min(arr[j][k], arr[j][i] + arr[i][k]);
+                    }
+                }
+            }
+        }
+
+        for(int i=1;i<=v;i++){ // 사이클을 그려야하므로 (a,b) + (b,a) 경로를 더한 것 중 가장 작은 거 출력
+            for(int j=1;j<=v;j++){
+                if(i!=j){
+                    if(arr[i][j]+arr[j][i] < min)
+                        min = arr[i][j]+arr[j][i];
+                }
+            }
+        }
+        if(min < 10000000)
+            System.out.println(min);
+        else
             System.out.println("-1");
-        System.out.println(min);
-    }
-
-    // (1,2) (2,1) -> 6
-    public static void dfs(int start) {
-        // 시작지점이랑 돌아온 지점이 같은 경우
-        if(firstStart == start && cnt==0){
-            if(min > length)
-                min = length;
-            return;
-        }
-
-        // 불가능한 경우 -1 출력
-        int i = start;
-
-        for(int j=1;j<=v;j++) {
-            if(visit[start]==1) {// 이미 방문했던 애면
-
-            }
-
-            if (arr[i][j] != 0) { // 0이 아닌 경우에 더하고
-                length += arr[i][j]; // length=1
-                start = j; // start = 2
-                visit[start]=1;
-                dfs(start); // dfs(2)
-                cnt=0;
-                length -= arr[i][j];
-            }
-        }
     }
 }
-
-/*
-- 도로 길이의 합이 가장 작은 사이클 찾기
-- 최단거리 : 원형큐
-1. 0과 -1이 아닌 지점부터 포문 돌면서 -1 과 0이 아닌
-(2.n) 을 21 22 23 각각 큐에 넣음
-- n자리가 시작점이랑 동일하면 저장
-* */
