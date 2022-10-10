@@ -45,6 +45,8 @@ class Solution {
     ** 3번과 연결된 애가 2번과 연결된 애랑 cnt 가 동일하지 않는 문제가 생김
 
     그래서 Node 라는 클래스를 선언해서 깊이까지 같이 저장하고 큐에서 꺼낼때 그놈에서 +1씩해서 깊이를 구해줬음
+    -> dist 배열에서 꺼내와서 +1 해줘도 됐네 ...
+
     */
     public void bfs(int num, int[][] edge){
         Queue<Node> q = new LinkedList<>();
