@@ -38,11 +38,10 @@ class Solution {
             // 스택에 들어가려는 값이, 현재 스택 제일 상단의 값보다 큰 경우
             // == 즉, 가격이 떨어지지 않은 경우의 인덱스를 스택에 넣기
         }
-        System.out.println(stack);
 
         while(!stack.isEmpty()){
             int leftIdx = stack.pop();
-            answer[leftIdx] = len-leftIdx-1;
+            answer[leftIdx] = prices.length-leftIdx-1;
         }
 
         return answer;
