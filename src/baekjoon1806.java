@@ -1,36 +1,35 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class baekjoon3273 {
+public class baekjoon1806 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
-        int x = Integer.parseInt(st.nextToken());
+        int s = Integer.parseInt(st.nextToken());
         int arr[] = new int[n];
         st = new StringTokenizer(br.readLine());
-        for(int i=0;i<n;i++){
+        for(int i=0;i<arr.length;i++){
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        Arrays.sort(arr);
-        int cnt=0;
-        int start=0, end=n-1;
-        while(start<end){
-            int startNum = arr[start];
-            int endNum = arr[end];
-            if(startNum+endNum==x){
-                cnt++;
-                end--;
-            }
-            else if(startNum+endNum<x){
+        int start = 0;
+        int end = 1;
+        int sum = arr[0];
+        int min = Integer.MAX_VALUE;
+        while(end<n){
+            if(sum >= s){
+                min = Math.min(min, end-start);
+                sum -= arr[start];
                 start++;
             }
-            else end--;
+            else if(sum < s){
+                sum += arr[end];
+                end++;
+            }
         }
-        System.out.println(cnt);
+        System.out.println(min);
     }
 }
