@@ -1,7 +1,7 @@
-// 사람을 나열 하는 방법을 사전 순으로 나열 했을 때, k번째 방법을 return
+// 문제 : 사람을 나열 하는 방법을 사전 순으로 나열 했을 때, k번째 방법을 return한다
+// 1,2,3 까지 갓다가 1,3,2 로 다시 돌아가야 하니까 뭔가 방문 배열을 해놓고 되돌아가는 코드가 필요할듯
 
 /*
-
 2 =
 (1,2)
 (2,1)
@@ -22,41 +22,41 @@
 
 사전식배열 -> 백트래킹?
 */
+
+// 시간초과 코드
 import java.util.*;
 class Solution {
     static boolean visited[];
-    static List<Integer> list;
-    static int cnt = 0;
+    static int cnt = 1;
+    static int answer[];
+    static int real[];
     public int[] solution(int n, long k) {
-        int[] answer = {};
+        answer = new int[n];
+        real = new int[n];
         visited = new boolean[n+1];
-        list = new ArrayList<>();
         backtracking(0, 1, n, k);
-        for(int i=0;i<list.size();i++){
-            System.out.println(list.get(i));
-        }
-
-        // 백트래킹은 depth 와 start 가 필요하다??
-        return answer;
+        return real;
     }
 
     public void backtracking(int depth, int start, int n, long k){
         if(depth == n){ // 4개의 지점을 모두 방문한 경우
             if(cnt == k){
-                // 5번째 수인 경우
-                return;
+                for(int i=0;i<answer.length;i++){
+                    real[i] = answer[i];
+                }
             }
+            else if(cnt > k) // 이거 없으면 끝까지 for문을 돈다
+                return;
             cnt++;
         }
 
-        for(int i=start;i<=n;i++){
-            visited[i] = true;
-            list.add(i);
-            backtracking(depth+1, i+1, n, k);
-            visited[i] = false;
+        for(int i=1;i<=n;i++){
+            if(visited[i] == false){
+                visited[i] = true;
+                answer[depth] = i;
+                backtracking(depth+1, i+1, n, k);
+                visited[i] = false;
+            }
         }
-        // 1을 visit 처리, backtracking (Depth = 1, start = 2)
-        // 2를 visit 처리, backtracking (Depth = 2, start = 3)
-        // 3을 visit 처리, backtracking (Depth = 3, start = 4)
     }
 }
