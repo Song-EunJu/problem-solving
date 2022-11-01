@@ -60,7 +60,7 @@ public class baekjoon3190 {
             return;
 
         // 범위를 벗어나는 경우
-        if()
+//        if()
 
         if(board[headY][headX] == 1) // 이동한 칸에 사과가 있다면
             board[headY][headX] = 0; // 사과가 없어지고 꼬리는 움직이지 않음
@@ -98,9 +98,9 @@ public class baekjoon3190 {
 
         second++;
         countTime(headY, headX, tailY, tailX, direction);
-
-        if() // 벽 또는 자기자신과 몸이 부딪히면 게임 끝남
-            break;
+//
+//        if() // 벽 또는 자기자신과 몸이 부딪히면 게임 끝남
+//            break;
     }
 }
 
