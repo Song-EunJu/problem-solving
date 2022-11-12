@@ -65,22 +65,4 @@ public class test {
         }
         max = Math.max(max, cnt);
     }
-//    public static void bfs(int start){
-//        Queue<Integer> queue = new LinkedList<>();
-//        queue.add(start);
-//        visited[start] = true;
-//        cnt++;
-//
-//        while(!queue.isEmpty()){
-//            cnt++;
-//            int n = queue.poll();
-//            for(int i=1;i<=N;i++){
-//                if(arr[n][i] == 1 && visited[i] == false){
-//                    queue.add(i);
-//                    visited[i] = true;
-//                }
-//            }
-//        }
-//        max = Math.max(max, cnt);
-//    }
 }
