@@ -1,3 +1,5 @@
+// 원순열을 배열 0번째 열에 마지막 원소 값을 채워넣는 것으로 구현
+
 import java.util.*;
 import java.io.*;
 public class Main {
@@ -12,9 +14,7 @@ public class Main {
         int T = Integer.parseInt(br.readLine()); // 테스트 수행횟수
         for(int i=0;i<T;i++){
             max = Integer.MIN_VALUE;
-            int N = Integer.parseInt(br.readLine()); // 서로 다른 숫자
-
-            // 모든 배열의 길이는 5, 실제 데이터 개수는 4
+            int N = Integer.parseInt(br.readLine());
 
             int arr[] = new int[N+1]; // 첫칸을 맨마지막 요소로 채우기 위해서 N+1로 초기화
 
@@ -48,14 +48,13 @@ public class Main {
             return;
         }
 
-        for(int i=1;i<arr.length;i++){ // i=num 으로 하면, 방문하지 못한 지점인데도 놓치게 됨
+        for(int i=1;i<arr.length;i++){
             if(visited[i] == false){ // 방문하지 않은 경우
-                number[num] = arr[i]; // number[i] = arr[i] 이렇게 하면 i 값이 계속 바뀌므로 바꾸고 싶은 자리를 못 바꿈
-                visited[i] = true; // visited[num] 으로 하면, 특정 자리만 바꾸게 되니까 바꾸고자 하는 i 값으로 바꿔야 함
+                number[num] = arr[i];
+                visited[i] = true;
                 dfs(arr, num+1);
                 visited[i] = false;
             }
         }
     }
 }
- 

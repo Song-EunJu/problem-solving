@@ -1,11 +1,11 @@
-// 시간초과 나는 코드
+// 테스트케이스는 맞지만 시간초과 나는 코드
 import java.util.*;
 import java.io.*;
 
 class Node {
     int y;
     int x;
-    int sec; // 퍼져나가는 한 세트마다 초를 늘려줘야 하기 때문에, second 값을 가지고 다녀야 함.
+    int sec; // 퍼져나가는 한 단위마다 초를 늘려줘야 하기 때문에 second 값 저장
 
     public Node(int y, int x, int sec){
         this.y = y;
@@ -61,37 +61,40 @@ public class Main {
                 maxC = maxC < C ? C : maxC;
             }
 
-            // 일단, 벽이 아닌 공간 '#' 이 아닌 공간은 폭탄 투하 지점이 될 수 있음
-            // FOR문을 돌면서 BFS 함수를 돌도록 작성
-            // 모든 지점을 다 돌면 안됨 -> 투하시킬 지점을 필터링할 조건은??
-
+            // 인화물질이 떨어진 곳 최소 x,y좌표 / 최대 x,y좌표를 구해서 해당 범위만 검사
             for(int i=minR;i<=maxR;i++){
                 for(int j=minC;j<=maxC;j++){
                     if(check(i, j)){
                         int second = bfs(i,j);
-                        if(tmpCount == 0) // 모든 물질을 제거했을 경우에만 second 최솟값 계산
+                        if(tmpCount == 0) // 모든 인화 물질을 제거했을 경우에만 second 최솟값 계산
                             min = Math.min(second, min);
                     }
                 }
             }
+
+            // 모든 인화 물질 제거 못한 경우 -1
             min = (min == Integer.MAX_VALUE) ? -1 : min;
             sb.append("#"+(test+1)+" "+min+"\n");
         }
         System.out.print(sb);
     }
 
+    // 벽인지 체크
     public static boolean check(int y, int x){
         if(fire[y][x] == '#')
             return false;
+
         return true;
     }
 
+    // 좌표가 배열 범위 내에 있는 지 확인
     public static boolean isIn(int posY, int posX){
         if(posY>=1 && posY<=N && posX>=1 && posX<=M)
             return true;
         return false;
     }
 
+    // 방문 배열 초기화
     public static void fillArray(){
         for(boolean visit[] : visited)
             Arrays.fill(visit, false);
