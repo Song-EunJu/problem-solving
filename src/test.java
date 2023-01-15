@@ -54,6 +54,10 @@ public class test {
         }
     }
     public static void dfs(int posY, int posX, int sum, int num){
+        // 지금까지의 거리가 이미 구해진 경로보다 크면 더이상 확인할 필요가 없음
+        if(sum > min)
+            return;
+
         if(num == N){
             // 회사와 집 간의 거리만 더해줌
             sum += getDistance(posY, house.y, posX, house.x);

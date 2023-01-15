@@ -136,6 +136,10 @@ public class test {
         }
     }
     public static void dfs(int posY, int posX, int sum, int num){
+        // 지금까지의 거리가 이미 구해진 경로보다 크면 더이상 확인할 필요가 없음
+        if(sum > min)
+            return;
+
         if(num == N){
             // 회사와 집 간의 거리만 더해줌
             sum += getDistance(posY, house.y, posX, house.x);
@@ -158,3 +162,12 @@ public class test {
         return Math.abs(y1-y2) + Math.abs(x1-x2);
     }
 }
+
+/**
+ * Traveling Salesperson Problem : TSP
+ * 특정 도시를 출발하여 다른 도시들을 한 번씩만 들린 후, 다시 출발한 곳으로 돌아오는 경로를 찾는 문제
+ * -> 경로의 합이 최소가 되어야 함
+ * -> 외판원 문제
+ *
+ * NP 문제는 형식적으로는, 문제를 푸는 각 단계에서 여러 가지의 가능성을 동시에 고려할 수 있는 비결정적 알고리즘(non-deterministic algorithm)으로, 다항시간 내에 문제를 해결할 수 있는 문제
+ * */
