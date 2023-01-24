@@ -1,29 +1,50 @@
-interface Fightable {
-    public abstract int fire();
-}
-
-interface Transformable {
-    public abstract void changeShape(boolean isHeroMode);
-}
-
-interface Heroable extends Transformable, Fightable {
-    void upgrade();
-}
-
-public class poli implements Heroable{
-
-    @Override
-    public int fire() {
-        return 0;
-    }
-
-    @Override
-    public void changeShape(boolean isHeroMode) {
-        System.out.println("모양 변경");
-    }
-
-    @Override
-    public void upgrade() {
-        System.out.println("버전 업");
+interface MyInterface {
+    default void hi() {
+        System.out.println("hi");
     }
 }
+
+class MySuperClass {
+    public void hi(){
+        System.out.println("super hi");
+    }
+}
+
+class MyClass extends MySuperClass implements MyInterface {
+
+}
+
+public class poli {
+    public static void main(String[] args) {
+        MyClass my = new MyClass();
+        my.hi();
+    }
+}
+
+//interface MyInterface1 {
+//    default void method() {
+//        System.out.println("interface1 hi");
+//    }
+//}
+//
+//interface MyInterface2 {
+//    void method();
+//}
+//
+//class MyClass implements MyInterface2, MyInterface1 {
+//    @Override
+//    public void method(){
+//        System.out.println("myclass");
+//    }
+//}
+//public class poli implements MyInterface1, MyInterface2 {
+//    public static void main(String[] args) {
+//        MyClass my = new MyClass();
+//        my.method();
+//    }
+//
+//    @Override
+//    public void method() {
+//        System.out.println("hihihih");
+//    }
+//}
