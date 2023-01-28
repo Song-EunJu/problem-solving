@@ -9,18 +9,18 @@ public abstract class HomeAppliance implements Controllable {
 
 	// HomeAppliance 는 각각의 volumn을 가져야함
 	public int volume;
-	
+
 	// 최대 볼륨은 세팅되면 바뀌면 안되기 때문에 final 로 선언
-	// 또한 여기에 생성자로 초기화하는 이유가 디폴트값으로 초기화해버리면, 한번 초기값 설정이 된거라 다음부터 변경할 수 없음 
+	// 또한 여기에 생성자로 초기화하는 이유가 디폴트값으로 초기화해버리면, 한번 초기값 설정이 된거라 다음부터 변경할 수 없음
 	public final int MAX_VOLUME;
-	
+
 	// min_volumn 은 최소 볼륨 0 으로 다 동일하니까 static
 	public static final int MIN_VOLUME = 0;
 	public boolean powerOn;
-	
+
 	public HomeAppliance(int maxVolume) {
 		super();
-		this.MAX_VOLUME = maxVolume; // final 객체상수, 생성자에서 초기화해야함 
+		this.MAX_VOLUME = maxVolume; // final 객체상수, 생성자에서 초기화해야함
 	}
 
 	@Override
