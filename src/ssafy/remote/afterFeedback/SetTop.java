@@ -1,4 +1,4 @@
-package ssafy.remote;
+package ssafy.remote.afterFeedback;
 
 public class SetTop extends Product{
 	public SetTop(int volumn, int maxVolumn) {

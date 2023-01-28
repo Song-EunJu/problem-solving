@@ -1,4 +1,4 @@
-package ssafy.remote;
+package ssafy.remote.afterFeedback;
 
 public interface Controllable {
     void volumnUp();

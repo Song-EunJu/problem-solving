@@ -1,4 +1,4 @@
-package ssafy.remote;
+package ssafy.remote.afterFeedback;
 
 public class RemoteTest {
 	public static void main(String[] args) {
