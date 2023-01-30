@@ -1,3 +1,5 @@
+package ssafy.remote.firstTry;
+
 public class RemoteController {
 	void volumnUp(Product p) {
 		p.volumnUp(p.getValue());

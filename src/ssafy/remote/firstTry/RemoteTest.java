@@ -1,7 +1,11 @@
+package ssafy.remote.firstTry;
+
+
+
 public class RemoteTest {
 	public static void main(String[] args) {
 		Product[] p = {
-				new TV(0, 10, 1, 5), 
+				new TV(0, 10, 1, 5),
 				new SetTop(0, 20, 1, 1)
 		};
 		

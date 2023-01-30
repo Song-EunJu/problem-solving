@@ -3,7 +3,11 @@ import java.util.List;
 
 // 도서 리스트를 관리하는 클래스
 public class BookManagerImpl implements IBookManager{
+    // BookManagerImpl 이 Book 을 가지고 있는 관계 - Aggregation
+
     private List<Book> books = new ArrayList<>();
+
+    // 인터페이스를 구현한 클래스는 인터페이스 타입으로 변수를 선언하여 인스턴스를 생성할 수 있다.
     private static IBookManager instance = new BookManagerImpl();
     public static IBookManager getInstance() {
         return instance;

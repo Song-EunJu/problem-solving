@@ -1,3 +1,5 @@
+package ssafy.remote.firstTry;
+
 public abstract class Product {
 	private boolean power;
 	private int volumn;
