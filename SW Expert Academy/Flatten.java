@@ -33,3 +33,32 @@ public class test {
         System.out.println(sb);
     }
 }
+
+// 제한된 횟수만큼 옮기는 작업을 한 후 최고점과 최저점의 차이를 반환하는 프로그램
+public class Flatten {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        for(int i=0;i<10;i++) {
+            int dump = Integer.parseInt(br.readLine());
+            st = new StringTokenizer(br.readLine());
+            int arr[] = new int[100];
+            for(int j=0;j<100;j++) {
+                arr[j] = Integer.parseInt(st.nextToken());
+            }
+
+            int dist = 0;
+            for(int j=0;j<dump;j++) {
+                Arrays.sort(arr);
+                arr[99]--;
+                arr[0]++;
+            }
+
+            // dump번 평탄화를 수행하고 나서 최종값으로 정렬해주고 차이를 출력
+            Arrays.sort(arr);
+            dist = arr[99]-arr[0];
+            System.out.println("#"+(i+1)+" "+dist);
+        }
+    }
+}
