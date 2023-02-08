@@ -211,18 +211,5 @@
 //}
 
 public class javatest {
-    public static void main(String[] args) {
-        int num = 1;
-        try {
-            System.out.println("code1");
-            int i = 1/num;
-            System.out.println("code2");
-            return ;
-        } catch(ArithmeticException e){
-            System.out.println("Code3");
-        } finally {
-            System.out.println("code4");
-        }
-        System.out.println("code5");
-    }
+
 }
