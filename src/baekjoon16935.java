@@ -62,12 +62,16 @@ public class baekjoon16935 {
 
     // 오른쪽으로 90도 회전
     public static void three() {
+        // 가로, 세로 길이를 서로 교환
         n = (n == arr.length) ? arr[0].length : arr.length;
         m = (n == arr.length) ? arr[0].length : arr.length;
         int newArr[][] =  new int[n][m];
+
+        // arr 배열의 n행 0열에 있던 요소 -> newArr 배열의 0행 n열로
+        // 근데 arr 배열의 n행이 내림차순 형태임 (newArr 의 가로길이가 arr 의 세로 길이 였으므로 (m-1) 에서 j 만큼을 빼줘야 함)
         for(int i=0;i<n;i++) {
             for(int j=0;j<m;j++)
-                newArr[i][j] = arr[n-1-j][i];
+                newArr[i][j] = arr[(m-1)-j][i];
         }
         arr = newArr;
     }
@@ -79,7 +83,7 @@ public class baekjoon16935 {
         int newArr[][] =  new int[n][m];
         for(int i=0;i<n;i++) {
             for(int j=0;j<m;j++)
-                newArr[i][j] = arr[j][m-1-i];
+                newArr[i][j] = arr[j][(n-1)-i];
         }
         arr = newArr;
     }
