@@ -96,8 +96,7 @@ public class UplusCodingTest5 {
         }
     }
 }
-//
-//
+
 ////         * 1. b로 갈 배에 태울 때 사람수 >= 식인종수
 ////         *
 ////         *  b로 갈 배에 태운 후, a에 남은 사람수 >= 식인종 수라면 keep going
