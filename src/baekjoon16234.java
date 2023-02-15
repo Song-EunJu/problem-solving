@@ -3,6 +3,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
+class Pos {
+    int y;
+    int x;
+
+    Pos(int y, int x){
+        this.y = y;
+        this.x = x;
+    }
+}
 public class baekjoon16234 {
     static int N, L, R;
     static int arr[][];
@@ -26,17 +35,23 @@ public class baekjoon16234 {
         }
 
         int cnt=0;
-        while(cnt<9){
-            int impossible = 0;
+        while(true){
+            List<List<Pos>> list = new ArrayList<>();
             for(int i=0;i<N;i++){
                 for(int j=0;j<N;j++){
-                    List<int[]> list = bfs(i,j);
-                    if(!list.isEmpty()) // 인구 이동이 가능한 경우
-                        redistribution(list);
-                    else // 인구 이동이 불가능한 경우
-                        impossible++;
+                    if(!visit[i][j]) {
+                        List<Pos> posList = bfs(i, j);
+                        if(posList.size()!=0 && posList.size()!=1)
+                            list.add(posList);
+                    }
                 }
             }
+
+            if(list.size() == 0) // 인구변화가 없는 경우 중단
+                break;
+
+            // 국경선이 모두 열린 경우 인구이동 시작
+            redistribution(list);
 
             for(int i=0;i<N;i++){
                 for(int j=0;j<N;j++){
@@ -49,50 +64,52 @@ public class baekjoon16234 {
         System.out.println(cnt);
     }
 
-    public static List<int[]> bfs(int y, int x){
-        List<int[]> list = new ArrayList<>();
-        Queue<int[]> q = new LinkedList<>();
-        q.add(new int[]{y, x});
+    public static List<Pos> bfs(int y, int x){
+        List<Pos> list = new ArrayList<>();
+        Queue<Pos> q = new LinkedList<>();
+        q.add(new Pos(y,x));
 
-        while(!q.isEmpty()){
-            int[] now = q.poll();
-            int nowY = now[0];
-            int nowX = now[1];
-            list.add(new int[]{nowY, nowX});
+        while(!q.isEmpty()) {
+            Pos now = q.poll();
+            int nowY = now.y;
+            int nowX = now.x;
             visit[nowY][nowX] = true;
+            list.add(now);
 
-            for(int i=0;i<4;i++) {
+            for (int i = 0; i < 4; i++) {
                 int posY = nowY + dy[i];
                 int posX = nowX + dx[i];
-                if(posY >= 0 && posY < N && posX >= 0 && posX < N && !visit[posY][posX]) {
+                if (posY >= 0 && posY < N && posX >= 0 && posX < N && !visit[posY][posX]) {
                     // 범위에도 들어가고, 방문하지 않은 경우
                     int diff = Math.abs(arr[nowY][nowX] - arr[posY][posX]);
-                    if(L<=diff && diff<=R) { // 두 나라의 인구 차이가 범위 내에 들어간다면
-                        q.add(new int[]{posY, posX});
+                    if (L <= diff && diff <= R) { // 두 나라의 인구 차이가 범위 내에 들어간다면
+                        q.add(new Pos(posY, posX));
                     }
                 }
             }
         }
         return list;
-//        System.out.println("#####"+y+" "+x);
-//        for(int i=0;i<list.size();i++){
-//            System.out.print(arr[list.get(i)[0]][list.get(i)[1]]+" ");
-//        }
-//        System.out.println();
     }
 
-    public static void redistribution(List<int[]> list){
+    public static void redistribution(List<List<Pos>> list){
         int sum = 0;
-        for(int i=0;i<list.size();i++){
-            int y = list.get(i)[0];
-            int x = list.get(i)[1];
-            sum += arr[y][x];
-        }
-        int divide = sum/list.size();
-        for(int i=0;i<list.size();i++) {
-            int y = list.get(i)[0];
-            int x = list.get(i)[1];
-            arr[y][x] = divide;
+        for(int i=0;i<list.size();i++){ // 연합인구 그룹
+            List<Pos> population = list.get(i);
+            for(int j=0;j<population.size();j++){
+                int y = population.get(j).y;
+                int x = population.get(j).x;
+                sum += arr[y][x];
+            }
+
+            if(population.size()==0)
+                continue;
+
+            int divide = sum/population.size();
+            for(int j=0;j<population.size();j++){
+                int y = population.get(j).y;
+                int x = population.get(j).x;
+                arr[y][x] = divide;
+            }
         }
     }
 }
