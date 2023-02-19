@@ -210,6 +210,72 @@
 //    }
 //}
 
-public class javatest {
+//class Nodes {
+//    int x;
+//}
+//class javatest {
+//    public static class Nodes {
+//        int x;
+//    }
+//    public static void main(String[] args) {
+//        Nodes node = new Nodes();
+//        System.out.println(node.x);
+//    }
+//}
 
-}
+
+//import java.util.Arrays;
+//
+//class Student implements Comparable<Student>{
+//    int grade;
+//    int age;
+//
+//    public Student(int grade, int age) {
+//        this.grade = grade;
+//        this.age = age;
+//    }
+//
+//    @Override
+//    public int compareTo(Student st){
+//        return st.age - this.age; // 나이 내림차순
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "Student{" +
+//                "grade=" + grade +
+//                ", age=" + age +
+//                '}';
+//    }
+//}
+//class javatest {
+//    public static void main(String[] args) {
+//        Student st1 = new Student(100, 10);
+//        Student st2 = new Student(110, 11);
+//        Student st3 = new Student(120, 12);
+//        Student st4 = new Student(130, 13);
+//        Student[] students = new Student[]{st1, st2, st3, st4};
+//
+//        Arrays.sort(students);
+//        System.out.println(Arrays.toString(students));
+//    }
+//}
+
+//public class javatest {
+//    public static void main(String[] args) {
+//        try{
+//            add();
+//        } catch (AException e){
+//            System.out.println("여기");
+//        }
+//    }
+//
+//    public static void add() throws AException{
+//        try {
+//            throw new AException();
+//        } finally {
+//            System.out.println("hi");
+//        }
+//    }
+//}
+
