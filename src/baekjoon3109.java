@@ -29,42 +29,54 @@ public class baekjoon3109 {
          1번 경로에서 나올 수 있는게 a,b,c 경로가 있다고 가정
          -> a경로를 선택했을 때 뒤에서 1개만 더 선택할 수 있다고 가정
          -> 만약에 b 경로를 선택했다면 뒤에서 3개를 더 선택할 수 있었다면 ?
-         -> 그니까 하나의 경로를 선택한 다음에는 / y 인덱스 다음 지점으로 돌아가서 다시 뽑는 식으로 진행.
+         -> 그니까 하나의 경로를 선택한 다음에는, y 인덱스 다음 지점으로 돌아가서 다시 뽑는 식으로 진행.
          */
-        start(0, 0, 0);
-        System.out.println(max);
+        for(int i=0;i<R;i++) {
+            start(i, 0);
+        }
+
+        System.out.println(cnt);
     }
 
-    public static void start(int y, int x, int yIdx){
-        if(yIdx==C) { // R 만큼 다 뽑았을 때
-            max = Math.max(max, cnt);
-            System.out.println(max+" "+cnt);
-            cnt = 0;
-            visit = new boolean[R][C];
-        }
-
-        if(x==C) { // 마지막 열에 도착한 경우 (하나의 선택이 끝난 경우)
+    public static boolean start(int y, int x){
+        if(x==C-1) { // 마지막 열에 도착한 경우
             cnt++;
-            max = Math.max(max, cnt);
-            start(yIdx+1, 0, yIdx+1);
-            return;
+            return true;
         }
 
+        // 그리디? 라는 생각을 한 이유 -> 갈림길이 여러개 나오는 경우, 그 순간의 최선의 선택을 하여 최댓값을 구해야 함
+        // 근데 그 순간에 최선인지 아닌지 어떻게 알지? 무조건 안겹치게 위로 올려야 하는건지..
         for(int i=0;i<3;i++){
             int nowY = y+dy[i];
             int nowX = x+1;
+
+            // 범위 밖
+            if (!(nowY >= 0 && nowY < R) || !(nowX >= 0 && nowX < C)) continue;
+
+            // 건물
+            if (bread[nowY][nowX] == 'x') continue;
+
+            // 방문 표시
+            visit[nowY][nowX] = true;
+
+            //다음 라인 검사
+            //라인의 가지치기를 방지하기 위해 true를 리턴한다.
+            //true를 리턴하면 다음 분기문으로 넘어가지 않는다.
+            if (start(nowY,nowX)) return true;
+
             if(promising(nowY, nowX)){
                 visit[nowY][nowX] = true;
-                start(nowY, nowX, yIdx);
-                visit[nowY][nowX] = false;
+                start(nowY, nowX);
+//                break; // 갈림길 여러개 나오는 경우에 하나 true 처리하면 걔는 더이상 안가도록 break
             }
         }
+        return false;
     }
 
     // 한 경로 갔을 때
-
     public static boolean promising(int y, int x){
-        if(y>=0 && y<R && !visit[y][x] && bread[y][x]!='x') // Y가 범위안에 들어있고, 방문하지 않았고, 건물이 아닌 경우에만
+        // Y, X가 배열 내의 인덱스이며, 방문하지 않았고, 건물이 아닌 경우
+        if((y>=0 && y<R) && (x>=0 && x<C) && !visit[y][x] && bread[y][x]!='x')
             return true;
         return false;
     }
