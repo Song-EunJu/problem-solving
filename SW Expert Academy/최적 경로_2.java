@@ -79,7 +79,6 @@ public class 최적경로 {
     static int N;
     static boolean visit[];
     static int customer[][];
-    static int order[];
     static int companyY, companyX, homeY, homeX;
     static int min;
     public static void main(String[] args) throws IOException {
@@ -91,7 +90,6 @@ public class 최적경로 {
             min = Integer.MAX_VALUE;
             N = Integer.parseInt(br.readLine());
             customer = new int[N+1][2];
-            order = new int[N+1];
             visit = new boolean[N+1];
 
             st = new StringTokenizer(br.readLine());
@@ -114,19 +112,20 @@ public class 최적경로 {
             return;
 
         if(cnt == N+1){
-            sum += Math.abs(customer[order[N]][0]-homeY)+Math.abs(customer[order[N]][1]-homeX);
+            /** 여기서 y1, x1 이 마지막 고객 집 좌표니까 getDistance 함수 써서 다시 계산 */
+            sum += getDistance(homeY, homeX, y1, x1);
             min = Math.min(sum, min);
             return;
         }
 
         /**
-         * 순열 코드 다시 확인필요
-         * i번째를 방문했는지도 체크하고, cnt 번째 순서에 i 방문한 것도 저장해야 함
+         * i=1 부터 N 까지 탐색하면서 order 배열에 순서를 저장해두려고 순열 코드를 사용했었음
+         * -> 근데 방문순서를 굳이 order 배열에 저장할 필요가 없었음
+         * -> 그냥 visit 체크하면서 돌아댕기면 됨. 단순 재귀
          * */
         for(int i=1;i<=N;i++){
             if(visit[i])
                 continue;
-            order[cnt] = i;
             visit[i] = true;
             int nextY = customer[i][0];
             int nextX = customer[i][1];
