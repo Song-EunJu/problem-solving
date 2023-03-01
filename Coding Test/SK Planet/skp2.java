@@ -2,12 +2,14 @@ import java.util.*;
 class skp2 {
     public static void main(String[] args) {
         int[] p = {2,2,-1,1,5,-1,5};
-        int[] b = {1,5};// 4,3 // 1,5 -> 0,3
+        int[] b = {2,5};// 4,3 -> 2번이 속한 그룹의 조직원, 5번이 속한 그룹의 조직원 수 구하기
+        // 1,5 -> 0,3 (보스가 아니면 0)
+
         int[] ar = solution(p,b);
+
         for(int i=0; i<ar.length; i++){
             System.out.println(ar[i]+ " ");
         }
-
     }
 
     public static int[] solution(int[] p, int[] b) {
