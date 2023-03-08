@@ -4,6 +4,9 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class baekjoon17471 {
+    static boolean visit[];
+    static int population[];
+    static int map[][];
     public static void main(String[] args) throws IOException {
         // 구역을 두 개의 선거구로 나눠야 하고,
         // 각 구역은 두 선거구 중 하나에 포함되어야 한다.
@@ -13,19 +16,26 @@ public class baekjoon17471 {
 
         // 두 선거구에 포함된 인구차이를 최소로 하기
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        int population[] = new int[N+1];
+        int N = Integer.parseInt(br.readLine()); // 구역 개수
+        visit = new boolean[N+1];
+        population = new int[N+1]; // 구역의 인구
+        map = new int[N+1][N+1];
         StringTokenizer st = new StringTokenizer(br.readLine());
         for(int i=1;i<=N;i++){
             population[i] = Integer.parseInt(st.nextToken());
         }
+
         for(int i=0;i<N;i++){
             st = new StringTokenizer(br.readLine());
             int m = Integer.parseInt(st.nextToken());
             for(int j=0;j<m;j++){
-
+                map[i+1][Integer.parseInt(st.nextToken())] = 1;
             }
         }
 
+
+        // 구역을 2개로 나누기
+        // 그 구역 2개가 다 연결되어있는지 체크
+        // 연결되어 있다면 인구의 합이 최소
     }
 }
