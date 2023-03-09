@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+// 배열 A의 값 = 각 행에 있는 모든 수의 합 중 최소
+// 회전 연산의 순서도 정해야 하는 건가
 public class baekjoon17406 {
     static int arr[][];
     public static void main(String[] args) throws IOException {
@@ -25,11 +27,11 @@ public class baekjoon17406 {
             int r = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken());
             int s = Integer.parseInt(st.nextToken());
-            turn();
+            turn(r-s, c-s, r+s, c+s);
         }
     }
 
-    public static void turn(){
+    public static void turn(int startY, int startX, int endY, int endX){
 
     }
 }

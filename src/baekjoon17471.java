@@ -7,6 +7,8 @@ public class baekjoon17471 {
     static boolean visit[];
     static int population[];
     static int map[][];
+
+    //
     public static void main(String[] args) throws IOException {
         // 구역을 두 개의 선거구로 나눠야 하고,
         // 각 구역은 두 선거구 중 하나에 포함되어야 한다.
@@ -35,7 +37,8 @@ public class baekjoon17471 {
 
 
         // 구역을 2개로 나누기
-        // 그 구역 2개가 다 연결되어있는지 체크
+        // 그 구역 2개가 다 연결되어있는지 체크 -> find 해서 부모가 같은 지 찾고
         // 연결되어 있다면 인구의 합이 최소
     }
+
 }
