@@ -4,6 +4,12 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
+/**
+ * top-down : 재귀 -> 특정 값을 주고 구해라  ex) f(8)을 구해라
+ *            재귀 + 메모이제이션 -> DP
+ *            가장 큰 문제에서 작은 문제를 쪼개가면서 하니까 분할정복
+ * bottom-up : 반복문 -> 전체를 다 돌면서 최소, 최대 값을 구해라
+ * */
 public class baekjoon1149 {
 
     public static void main(String[] args) throws IOException {
@@ -14,10 +20,8 @@ public class baekjoon1149 {
 
         for(int i=0;i<N;i++){
             StringTokenizer st = new StringTokenizer(br.readLine());
-            for(int j=0;j<3;j++) {
-                int num = Integer.parseInt(st.nextToken());
-                array[i][j] = num;
-            }
+            for(int j=0;j<3;j++)
+                array[i][j] = Integer.parseInt(st.nextToken());
         }
 
         for(int i=0;i<N;i++) {
